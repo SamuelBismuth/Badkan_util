@@ -63,7 +63,7 @@ def send_mail(subject, message, client_mail):
     print(MY_ADDRESS)
     print(PASSWORD)
     print(client_mail)
-    msg = MIMEMultipart('alternative')
+    msg = MIMEMultipart()
     msg['Subject'] = subject
     msg['From'] = MY_ADDRESS
     msg['To'] = client_mail
@@ -71,7 +71,7 @@ def send_mail(subject, message, client_mail):
     s = smtplib.SMTP(host='smtp-mail.outlook.com', port=587)
     s.starttls()
     s.login(MY_ADDRESS, PASSWORD)
-    s.sendmail(MY_ADDRESS, client_mail, msg.as_string())
+    s.send_message(msg)
     del msg
     s.quit()
 
